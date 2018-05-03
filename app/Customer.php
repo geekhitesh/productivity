@@ -13,6 +13,15 @@ class Customer extends Model
     {
     	
     	return $this->hasMany('App\Order');
+    }
 
+    public function addresses()
+    {
+    	return $this->hasMany('App\Address');
+    }
+
+    public function cart()
+    {
+    	return $this->hasMany('App\CustomerCart');
     }
 }
