@@ -20,6 +20,7 @@ class CreateProductCategoriesTable extends Migration
             $table->text('description');
             $table->text('meta_tags');
             $table->string('image_url');
+            $table->string('push_to_website',30);
             $table->timestamps();
         });
     }

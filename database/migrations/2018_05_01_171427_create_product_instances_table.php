@@ -16,8 +16,10 @@ class CreateProductInstancesTable extends Migration
         Schema::create('product_instances', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id');
-            $table->integer('discount_id');
             $table->integer('product_id');
+            $table->integer('price');
+            $table->string('discount_type');
+            $table->integer('discount_value');
             $table->timestamps();
         });
     }

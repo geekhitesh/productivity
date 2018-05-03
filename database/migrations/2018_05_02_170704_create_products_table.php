@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
             $table->text('meta_tags');
             $table->integer('price');
             $table->text('image_url');
+            $table->string('push_to_website',30);
+            $table->string('featured',30);
             $table->date('expiration_date');
             $table->timestamps();
         });
