@@ -24,6 +24,7 @@ class CreateCustomersTable extends Migration
             $table->string('password', 60)->nullable();
             $table->string('provider');
             $table->string('provider_id');
+            $table->string('newsletter',30);
             $table->rememberToken();
             $table->timestamps();
         });
