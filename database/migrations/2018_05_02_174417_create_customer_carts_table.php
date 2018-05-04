@@ -17,6 +17,7 @@ class CreateCustomerCartsTable extends Migration
             $table->increments('id');
             $table->integer('customer_id');
             $table->integer('product_id');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
