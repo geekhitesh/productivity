@@ -38,4 +38,9 @@ class Product extends Model
     	return $this->belongsTo('App\Discount');	
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany('App\ProductGroup','product_groups_product');
+    }    
+
 }

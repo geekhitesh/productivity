@@ -18,13 +18,13 @@ class CreateCustomersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('mobile_no',30);
-            $table->string('profile_photo_url');
+            $table->string('profile_photo_url')->nullable();
             $table->date('date_of_birth');
             $table->string('email')->nullable();
             $table->string('password', 60)->nullable();
-            $table->string('provider');
-            $table->string('provider_id');
-            $table->string('newsletter',30);
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
+            $table->string('newsletter',30)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

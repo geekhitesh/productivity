@@ -17,10 +17,10 @@ class CreateProductCategoriesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('name');
-            $table->text('description');
-            $table->text('meta_tags');
-            $table->string('image_url');
-            $table->string('push_to_website',30);
+            $table->text('description')->nullable();
+            $table->text('meta_tags')->nullable();
+            $table->string('image_url')->nullable();
+            $table->string('push_to_website',30)->nullable();
             $table->timestamps();
         });
     }

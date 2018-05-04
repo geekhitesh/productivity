@@ -40,6 +40,7 @@ Route::get('/test', function () {
 	//return App\Product::find(1)->productSubCategory; // get product sub category
 	//return App\Product::find(1)->discount; // get product discount
 	//return App\Product::find(1)->user; // get user who created the product
+	return App\Product::find(4)->groups; // get all groups this product belongs to.
 
 	//return App\Order::find(1); // get order details by id
 	//return App\Order::find(1)->customer; // get customer details by order id
@@ -48,7 +49,13 @@ Route::get('/test', function () {
 
 	//return App\ProductInstance::find(1); // get instance details
 	//return App\ProductInstance::find(1)->order; // get order details
-	return App\ProductInstance::find(1)->product; // get product details
+	//return App\ProductInstance::find(1)->product; // get product details
+
+
+	//return App\ProductGroup::find(1); // get package details
+	//return App\ProductGroup::find(2)->products; // get products in a package
+
+
 
 
 

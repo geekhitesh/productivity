@@ -18,15 +18,16 @@ class CreateProductsTable extends Migration
             $table->integer('user_id');
             $table->integer('discount_id');
             $table->integer('product_category_id');
-            $table->integer('product_sub_category_id');
+            $table->integer('product_sub_category_id')->nullable();
             $table->string('name');
             $table->text('description');
             $table->text('meta_tags');
             $table->integer('price');
             $table->text('image_url');
             $table->string('push_to_website',30);
-            $table->string('featured',30);
-            $table->date('expiration_date');
+            $table->string('featured',30)->nullable();
+            $table->text('key_features',30)->nullable();
+            $table->date('expiration_date')->nullable();
             $table->timestamps();
         });
     }

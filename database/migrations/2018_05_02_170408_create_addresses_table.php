@@ -17,14 +17,14 @@ class CreateAddressesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('customer_id');
-            $table->string('address_type');
-            $table->string('address_line_1');
-            $table->string('address_line_2');
+            $table->string('address_type')->nullable();
+            $table->string('address_line_1')->nullable();
+            $table->string('address_line_2')->nullable();
             $table->string('city');
             $table->string('state');
             $table->string('zipcode');
             $table->string('country');
-            $table->date('expiration_date');
+            $table->date('expiration_date')->nullable();
             $table->timestamps();
 
         });

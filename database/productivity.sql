@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2018 at 08:10 PM
+-- Generation Time: May 04, 2018 at 06:56 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.0.28
 
@@ -32,14 +32,14 @@ CREATE TABLE `addresses` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `address_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address_line_1` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address_line_2` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address_line_1` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address_line_2` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `state` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `zipcode` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `country` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expiration_date` date NOT NULL,
+  `expiration_date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -64,13 +64,13 @@ CREATE TABLE `customers` (
   `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mobile_no` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `profile_photo_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profile_photo_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_of_birth` date NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `provider` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `provider_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `newsletter` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `provider` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `newsletter` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -159,7 +159,20 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (63, '2018_05_02_170633_create_product_sub_categories_table', 1),
 (64, '2018_05_02_170649_create_discounts_table', 1),
 (65, '2018_05_02_170704_create_products_table', 1),
-(66, '2018_05_02_174417_create_customer_carts_table', 1);
+(66, '2018_05_02_174417_create_customer_carts_table', 1),
+(67, '2014_10_12_000000_create_users_table', 1),
+(68, '2014_10_12_100000_create_password_resets_table', 1),
+(69, '2018_05_01_165237_create_customers_table', 1),
+(70, '2018_05_01_170441_create_orders_table', 1),
+(71, '2018_05_01_171427_create_product_instances_table', 1),
+(72, '2018_05_02_170408_create_addresses_table', 1),
+(73, '2018_05_02_170551_create_product_categories_table', 1),
+(74, '2018_05_02_170633_create_product_sub_categories_table', 1),
+(75, '2018_05_02_170649_create_discounts_table', 1),
+(76, '2018_05_02_170704_create_products_table', 1),
+(77, '2018_05_02_174417_create_customer_carts_table', 1),
+(79, '2018_05_04_042418_create_product_groups_product_table', 1),
+(80, '2018_05_04_041937_create_product_groups_table', 2);
 
 -- --------------------------------------------------------
 
@@ -206,15 +219,16 @@ CREATE TABLE `products` (
   `user_id` int(11) NOT NULL,
   `discount_id` int(11) NOT NULL,
   `product_category_id` int(11) NOT NULL,
-  `product_sub_category_id` int(11) NOT NULL,
+  `product_sub_category_id` int(11) DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `meta_tags` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` int(11) NOT NULL,
   `image_url` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `push_to_website` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `featured` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expiration_date` date NOT NULL,
+  `featured` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `key_features` text COLLATE utf8mb4_unicode_ci,
+  `expiration_date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -223,11 +237,11 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `user_id`, `discount_id`, `product_category_id`, `product_sub_category_id`, `name`, `description`, `meta_tags`, `price`, `image_url`, `push_to_website`, `featured`, `expiration_date`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 1, 'Simple Bartender', 'Basic Package of Simple Bartenders', '', 130, '', '', '', '0000-00-00', NULL, NULL),
-(2, 1, 2, 1, 1, 'Exclusive Bartender Package', 'Basic Package of Simple Bartenders', '', 130, '', '', '', '0000-00-00', NULL, NULL),
-(3, 1, 2, 1, 2, 'Great Package', 'Great Package of Simple Bartenders', '', 130, '', 'true', '', '0000-00-00', NULL, NULL),
-(4, 1, 2, 2, 0, 'Category 2 Package', 'Great Package of Simple Bartenders', '', 130, '', 'true', '', '0000-00-00', NULL, NULL);
+INSERT INTO `products` (`id`, `user_id`, `discount_id`, `product_category_id`, `product_sub_category_id`, `name`, `description`, `meta_tags`, `price`, `image_url`, `push_to_website`, `featured`, `key_features`, `expiration_date`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 1, 'Simple Bartender', 'Basic Package of Simple Bartenders', '', 130, '', '', '', NULL, '0000-00-00', NULL, NULL),
+(2, 1, 2, 1, 1, 'Exclusive Bartender Package', 'Basic Package of Simple Bartenders', '', 130, '', '', '', NULL, '0000-00-00', NULL, NULL),
+(3, 1, 2, 1, 2, 'Great Package', 'Great Package of Simple Bartenders', '', 130, '', 'true', '', NULL, '0000-00-00', NULL, NULL),
+(4, 1, 2, 2, 0, 'Category 2 Package', 'Great Package of Simple Bartenders', '', 130, '', 'true', '', NULL, '0000-00-00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -239,10 +253,10 @@ CREATE TABLE `product_categories` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_tags` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `push_to_website` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `meta_tags` text COLLATE utf8mb4_unicode_ci,
+  `image_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `push_to_website` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -259,6 +273,59 @@ INSERT INTO `product_categories` (`id`, `user_id`, `name`, `description`, `meta_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product_groups`
+--
+
+CREATE TABLE `product_groups` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meta_tags` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key_features` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_groups`
+--
+
+INSERT INTO `product_groups` (`id`, `name`, `meta_tags`, `description`, `key_features`, `created_at`, `updated_at`) VALUES
+(1, 'package_1', 'alcoholic', 'alcoholic', 'alcoholic,non-alcoholic', '2018-05-03 18:30:00', NULL),
+(2, 'package_2', 'one plus one', 'one plus one', 'everything included', '2018-05-03 18:30:00', NULL),
+(3, 'package_3', 'one plus two', 'one plus two', 'everything included - prime membership', '2018-05-03 18:30:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_groups_product`
+--
+
+CREATE TABLE `product_groups_product` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_group_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_groups_product`
+--
+
+INSERT INTO `product_groups_product` (`id`, `product_id`, `product_group_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, NULL),
+(2, 2, 1, NULL, NULL),
+(3, 3, 1, NULL, NULL),
+(4, 1, 2, NULL, NULL),
+(5, 2, 2, NULL, NULL),
+(6, 1, 3, NULL, NULL),
+(7, 3, 3, NULL, NULL),
+(8, 4, 3, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product_instances`
 --
 
@@ -267,8 +334,8 @@ CREATE TABLE `product_instances` (
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
-  `discount_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `discount_value` int(11) NOT NULL,
+  `discount_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_value` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -397,6 +464,18 @@ ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `product_groups`
+--
+ALTER TABLE `product_groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_groups_product`
+--
+ALTER TABLE `product_groups_product`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product_instances`
 --
 ALTER TABLE `product_instances`
@@ -447,7 +526,7 @@ ALTER TABLE `discounts`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -466,6 +545,18 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `product_groups`
+--
+ALTER TABLE `product_groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `product_groups_product`
+--
+ALTER TABLE `product_groups_product`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_instances`
