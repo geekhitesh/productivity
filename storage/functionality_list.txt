@@ -1,0 +1,13 @@
+1)  sign-in local
+2)  sign-in facebook
+3)  sign-in twitter
+4)  sign-in google
+5)  sign-up local
+6)  view-profile-page
+7)  edit-profile-page
+8)  list-of-packages
+9)  list-of-products
+10) list of categories and subcategories associated
+11) add to cart
+12) delete from cart
+13) 
