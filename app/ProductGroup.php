@@ -12,4 +12,5 @@ class ProductGroup extends Model
     {
     	return $this->belongsToMany('App\Product','product_groups_product');
     }
+
 }

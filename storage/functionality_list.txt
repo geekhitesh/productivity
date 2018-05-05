@@ -10,4 +10,5 @@
 10) list of categories and subcategories associated
 11) add to cart
 12) delete from cart
-13) 
+13) list of featured products
+14) Cache Controller

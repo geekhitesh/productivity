@@ -32,6 +32,8 @@ Route::get('/test', function () {
     //return App\ProductCategory::find(2)->products; // get products
 	// return App\ProductCategory::find(2)->user; // get corresponding user
 
+     
+    //return App\Product::all(); // get product
 	//return App\Product::find(1); // get product
 	//return App\Product::find(1)->instances; // get product instances - sold
 	//return App\Product::find(1)->cart; // get products in cart
@@ -72,3 +74,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 // OAuth Routes
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+
+
+
+//Route::get('/cache/build/{user_id}','CacheController@build');
+
+Route::middleware(['api_auth'])->group(function () {
+    Route::get('/cache/build','CacheController@build');
+    Route::get('/cache/get/{key}','CacheController@get');
+    Route::get('/cache/destroy','CacheController@destroy');
+    Route::get('/cache/all','CacheController@all');
+
+});
