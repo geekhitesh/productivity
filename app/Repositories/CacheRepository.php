@@ -27,7 +27,12 @@ class CacheRepository {
 
     public function build()
     {
-    	$data = ProductCategory::with(['product_sub_categories','products'])->where('push_to_website','true')->get();
+    	$data = ProductCategory::with(
+                ['product_sub_categories' => function ($query) {
+                        $query->where('push_to_website','true');
+                    },
+                 'products'
+                ])->where('push_to_website','true')->get();
     	//$this->product_category_cache = $this->to_assoc(json_decode(json_encode($data),TRUE));
         $this->product_category_cache = Helper::to_assoc($data);
 
