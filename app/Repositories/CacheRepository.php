@@ -28,16 +28,17 @@ class CacheRepository {
     public function build()
     {
     	$data = ProductCategory::with(['product_sub_categories','products'])->where('push_to_website','true')->get();
-    	$this->product_category_cache = $this->to_assoc(json_decode(json_encode($data),TRUE));
+    	//$this->product_category_cache = $this->to_assoc(json_decode(json_encode($data),TRUE));
+        $this->product_category_cache = Helper::to_assoc($data);
 
     	$data = ProductGroup::with(['products'])->where('push_to_website','true')->get();
-    	$this->product_group_cache = $this->to_assoc(json_decode(json_encode($data),TRUE));
+    	$this->product_group_cache = Helper::to_assoc($data);
 
     	$data = Product::all()->where('featured','true')->where('push_to_website','true');
-    	$this->featured_product_cache = $this->to_assoc(json_decode(json_encode($data),TRUE));
+    	$this->featured_product_cache = Helper::to_assoc($data);
 
     	$data = Discount::all();
-    	$this->discount_cache = $this->to_assoc(json_decode(json_encode($data),TRUE));
+    	$this->discount_cache = Helper::to_assoc($data);
 
     	Cache::forever('product_category',$this->product_category_cache);
     	Cache::forever('product_group',$this->product_group_cache);
