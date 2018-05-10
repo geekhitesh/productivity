@@ -18,22 +18,22 @@
 				<div class="col-md-4 footer-grid animated wow slideInLeft" data-wow-delay=".7s">
 					<h3>New Posts</h3>
 					<div class="footer-grid-left">
-						<a href="single.php"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.php"><img src="{{ URL::asset('images/13.jpg') }}" alt=" " class="img-responsive" /></a>
 					</div>
 					<div class="footer-grid-left">
-						<a href="single.php"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.php"><img src="{{ URL::asset('images/14.jpg') }}" alt=" " class="img-responsive" /></a>
 					</div>
 					<div class="footer-grid-left">
-						<a href="single.php"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.php"><img src="{{ URL::asset('images/15.jpg') }}" alt=" " class="img-responsive" /></a>
 					</div>
 					<div class="footer-grid-left">
-						<a href="single.php"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.php"><img src="{{ URL::asset('images/16.jpg') }}" alt=" " class="img-responsive" /></a>
 					</div>
 					<div class="footer-grid-left">
-						<a href="single.php"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.php"><img src="{{ URL::asset('images/13.jpg') }}" alt=" " class="img-responsive" /></a>
 					</div>
 					<div class="footer-grid-left">
-						<a href="single.php"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.php"><img src="{{ URL::asset('images/14.jpg') }}" alt=" " class="img-responsive" /></a>
 					</div>
 
 					<div class="clearfix"> </div>
@@ -50,9 +50,9 @@
 	</div>
 <!-- //footer -->
 
-<script src="js/jquery-3.1.1.min.js"></script>
+<script src="{{ URL::asset('js/jquery-3.1.1.min.js') }}"></script>
 <!-- bxSlider Javascript file -->
-<script src="js/jquery.bxslider.js"></script>
+<script src="{{ URL::asset('js/jquery.bxslider.js') }}"></script>
 <script>
 $(document).ready(function(){
 $('.bxslider').bxSlider({

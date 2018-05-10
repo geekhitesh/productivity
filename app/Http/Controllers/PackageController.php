@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class PackageController extends Controller
 {
     //
-
 
     public function detail()
     {
 
     }
+
 
     public function listing()
     {

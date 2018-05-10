@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <title> Best Catering Services | Best Wedding Caterers In Delhi NCR | </title>
 <!-- for-mobile-apps -->
@@ -48,8 +49,12 @@
 					<ul>
 						<li class="none"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
 						<li class="none"><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 892</li>
-						<li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="login.php">Login</a></li>
-						<li><i class="glyphicon glyphicon-book" aria-hidden="true"></i><a href="register.php">Register</a></li>
+					@if (session('customer_name'))
+						<li><b>Welcome</b> {{session('customer_name')[0]}}</li>
+                   @else
+						<li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="customer/login">Login</a></li>
+						<li><i class="glyphicon glyphicon-book" aria-hidden="true"></i><a href="customer/register">Register</a></li>
+					@endif
 					</ul>
 				</div>
 				<div class="header-grid-right none animated wow slideInRight" data-wow-delay=".5s">
@@ -149,8 +154,8 @@
 						</div>
 					</div>
 						<!-- search-scripts -->
-						<script src="js/classie.js"></script>
-						<script src="js/uisearch.js"></script>
+						<script src="{{ URL::asset('js/classie.js') }}"></script>
+						<script src="{{ URL::asset('js/uisearch.js') }}"></script>
 							<script>
 								new UISearch( document.getElementById( 'sb-search' ) );
 							</script>
@@ -161,7 +166,7 @@
 						<a href="checkout.php">
 							<h3> <div class="total">
 								<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
-								<img src="images/bag.png" alt="" />
+								<img src="{{ URL::asset('images/bag.png') }}" alt="" />
 							</h3>
 						</a>
 						<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>

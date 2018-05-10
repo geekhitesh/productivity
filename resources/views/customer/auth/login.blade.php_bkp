@@ -20,12 +20,6 @@
 				deserunt mollit anim id est laborum.</p>
 			<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
 				<form>
-					<div class="login-fb loginBtn loginBtn--facebook">
-						<a href="https://www.facebook.com/"> Login with Facebook </a>
-					</div>
-					<div class="login-fb loginBtn loginBtn--google">
-						<a href="https://www.google.com/gmail/about/#"> Login with Google </a>
-					</div>
 					<input type="email" placeholder="Email Address" required=" " >
 					<input type="password" placeholder="Password" required=" " >
 					<div class="forgot">

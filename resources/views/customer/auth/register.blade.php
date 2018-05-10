@@ -1,4 +1,6 @@
-<?php include 'header.php';?>
+<head>
+    @include('customer.includes.header')
+</head>
 	
 <!-- breadcrumbs -->
 	<div class="breadcrumbs">
@@ -46,4 +48,6 @@
 		</div>
 	</div>
 <!-- //register -->
-<?php include 'footer.php';?>
+<footer class="row">
+    @include('customer.includes.footer')
+</footer>

@@ -11,6 +11,11 @@
 |
 */
 
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::get('/welcome', function () {
     return view('customer.general.welcome');
 });
@@ -85,4 +90,17 @@ Route::middleware(['api_auth'])->group(function () {
     Route::get('/cache/destroy','CacheController@destroy');
     Route::get('/cache/all','CacheController@all');
 
+});
+
+
+// Profile Routes
+
+Route::get('customer/login', function() {
+
+	return view('customer.auth.login');
+});
+
+Route::get('customer/register', function() {
+
+	return view('customer.auth.register');
 });
